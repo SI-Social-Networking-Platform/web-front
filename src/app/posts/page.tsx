@@ -84,32 +84,37 @@ const PostsPage = () => {
   };
 
   return (
-    <div className="flex flex-col items-center p-16">
-      <button
-        onClick={() => setIsModalOpen(true)}
-        className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded absolute right-12"
-      >
-        Add Post
-      </button>
-      <div>
-        <div className="">
-          <h1 className="text-4xl font-bold mb-16">Your posts</h1>
+      <div className="container mx-auto p-6">
+        <div className="flex justify-between items-center mb-5">
+          <h1 className="text-2xl font-bold">Your posts</h1>
+          <button
+            onClick={() => setIsModalOpen(true)}
+            className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded"
+          >
+            Add Post
+          </button>
         </div>
-        <section className="flex flex-col gap-4 justify-start">
-          {posts.map((post) => (
-            <article key={post.id} className="flex flex-col gap-2">
-              <h2 className="text-2xl font-bold">{post.title}</h2>
-              <p>{post.content}</p>
-            </article>
-          ))}
+        <section className="flex flex-col gap-4">
+          {posts.length > 0 ? (
+            posts.map((post) => (
+              <article
+                key={post.id}
+                className="flex flex-col gap-2 border p-4 rounded-md shadow-sm"
+              >
+                <h2 className="text-xl font-bold">{post.title}</h2>
+                <p>{post.content}</p>
+              </article>
+            ))
+          ) : (
+            <p>No posts available in your feed.</p>
+          )}
         </section>
-      </div>
       <CreatePostModal
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
         onSubmit={handleCreatePost}
       />
-    </div>
+      </div>
   );
 };
 

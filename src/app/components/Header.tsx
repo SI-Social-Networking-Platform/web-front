@@ -1,13 +1,13 @@
-'use client';
-import Link from 'next/link';
-import React, { useEffect, useState } from 'react';
+"use client";
+import Link from "next/link";
+import React, { useEffect, useState } from "react";
 import { jwtDecode } from "jwt-decode";
 
 const Header = () => {
   const [username, setUsername] = useState<string | null>(null);
 
   useEffect(() => {
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem("token");
 
     if (token) {
       const { unique_name } = jwtDecode<any>(token);
@@ -21,9 +21,13 @@ const Header = () => {
         <Link href="/" className="text-lg font-bold mr-4">
           Social Platform
         </Link>
-        <Link href="/search">Search</Link>
-        <Link href="/posts">Posts</Link>
-        <Link href="/feed">Feed</Link>
+        {username && (
+          <>
+            <Link href="/search">Search</Link>
+            <Link href="/posts">Posts</Link>
+            <Link href="/feed">Feed</Link>
+          </>
+        )}
       </div>
       <div className="flex gap-3">
         {username ? (
